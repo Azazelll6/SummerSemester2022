@@ -1,11 +1,13 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class MonoEventsBehavior : MonoBehaviour
 {
-    public UnityEvent startEvent, awakeEvent, disableEvent;
+    public UnityEvent startEvent, awakeEvent, disableEvent, onMouseDownEvent;
     
-    
+
     private void Awake()
     {
         awakeEvent.Invoke();
@@ -21,4 +23,8 @@ public class MonoEventsBehavior : MonoBehaviour
         disableEvent.Invoke();
     }
 
+    private void OnMouseDown()
+    {
+        onMouseDownEvent.Invoke();
+    }
 }
