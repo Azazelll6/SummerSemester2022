@@ -1,13 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DraggableBehavior : MonoBehaviour
 {
     private Camera cameraObj;
     public bool draggable;
     public Vector3 position, offset;
+    public UnityEvent startDragEvent, endDragEvent;
     
     void Start()
     {
@@ -20,6 +20,7 @@ public class DraggableBehavior : MonoBehaviour
         //between where the mouse is from the camera (camera is 0 0 0)
         offset = transform.position - cameraObj.ScreenToWorldPoint(Input.mousePosition);
         draggable = true;
+        startDragEvent.Invoke();
         yield return new WaitForFixedUpdate();
         
         while (draggable)
@@ -27,7 +28,7 @@ public class DraggableBehavior : MonoBehaviour
             //waits for a fixed update before performing next steps
             yield return new WaitForFixedUpdate();
             //Gets the mouse position on drag (does not move object just supplies data which is not offset)
-            //meaning it's transform does not look right
+            //and then adds the offset
             position = cameraObj.ScreenToWorldPoint(Input.mousePosition) + offset;
             //Applies the mouse position (gotten from line above & the defined offset) to the vector of the object
             transform.position = position;
@@ -38,5 +39,6 @@ public class DraggableBehavior : MonoBehaviour
     private void OnMouseUp()
     {
         draggable = false;
+        endDragEvent.Invoke();
     }
 }
