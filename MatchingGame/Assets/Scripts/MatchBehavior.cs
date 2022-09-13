@@ -1,20 +1,20 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.TextCore.LowLevel;
+
 
 public class MatchBehavior : MonoBehaviour
 {
     public ID idObj;
-    public UnityEvent matchEvent, noMatchEvent;
+    public UnityEvent matchEvent, noMatchEvent, noMatchDelayedEvent;
 
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator OnTriggerEnter(Collider other)
     {
         //Debug.Log(idObj);
         //Debug.Log(other.GetComponent<IDContainerBehavior>().idObj);
         var tempObj = other.GetComponent<IDContainerBehavior>();
         if (tempObj == null)
-            return;
+            yield break;
 
         var otherID = tempObj.idObj;
         if (otherID == idObj)
@@ -25,6 +25,8 @@ public class MatchBehavior : MonoBehaviour
         else
         {
             noMatchEvent.Invoke();
+            yield return new WaitForSeconds(0.5f);
+            noMatchDelayedEvent.Invoke();
             //Debug.Log("No Match");
         }
     }
