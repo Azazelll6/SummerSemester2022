@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu]
 public class Instancer : ScriptableObject
@@ -34,5 +34,13 @@ public class Instancer : ScriptableObject
         {
             num = 0;
         }
+    }   
+    
+    public void CreateInstanceListRandomly(Vector3DataList obj)
+    {
+        /*Cannot use "using system" to use random.range, you must do "using UnityEngine" and if that is still not
+         working use "using UnityEngine; using Random = UnityEngine.Random;" Make sure to remove using system.*/
+        num = Random.Range(0, obj.vector3DList.Count - 1);
+        Instantiate(prefab, obj.vector3DList[num].value, Quaternion.identity);
     }
 }
