@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187185c64fabb0f45af6051c87ea39f7, type: 3}
-  m_Name: Prefab Instance
+  m_Script: {fileID: 11500000, guid: 4b6642fd396c2b745bb11f4e94879016, type: 3}
+  m_Name: (Ring)V3 A
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7114429067992273801, guid: c67ead242025f95498efd9239b8580d4, type: 3}
+  value: {x: 3, y: 5, z: 0}
